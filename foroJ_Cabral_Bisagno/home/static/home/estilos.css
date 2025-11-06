@@ -19,3 +19,38 @@ body {
   font-size: 1.2rem;
   margin-top: 10px;
 }
+
+.bento-item {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+}
+
+.bento-item img {
+  width: 100%;
+  height: 215px; /* tu tamaño exacto */
+  object-fit: cover;
+  display: block;
+}
+
+.bento-content {
+  padding: 15px;
+}
+
+.bento-content h4 {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.bento-content p {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
