@@ -10,32 +10,50 @@
 </head>
 <body class="bg-dark text-light">
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR: siempre visible -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm border-bottom border-secondary">
     <div class="container">
+
       <a class="navbar-brand fw-bold" href="{% url 'home' %}">🎮 Foro J</a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+            <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Inicio</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'juegos' %}">Juegos</a>
+            <a class="nav-link {% if request.path == '/juegos/' %}active{% endif %}" href="{% url 'juegos' %}">Juegos</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'plataformas' %}">Plataformas</a>
+            <a class="nav-link {% if request.path == '/plataformas/' %}active{% endif %}" href="{% url 'plataformas' %}">Plataformas</a>
           </li>
+
         </ul>
-        <div class="d-flex">
-          <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
-          <a href="{% url 'registro' %}" class="btn btn-primary">Registrarse</a>
+
+        <div class="d-flex align-items-center">
+          {% if user.is_authenticated %}
+            <span class="me-3 text-light">
+              👋 Hola, {{ user.username }}
+            </span>
+            <a href="{% url 'perfil' %}" class="btn btn-outline-info me-2">Mi perfil</a>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar sesión</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Registrarse</a>
+          {% endif %}
         </div>
+
       </div>
     </div>
   </nav>
+
 
   <!-- ENCABEZADO -->
   <header class="text-center py-5">
