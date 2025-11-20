@@ -74,9 +74,15 @@
 
         </ul>
 
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
+          {% if user.is_authenticated %}
+          <span class="me-3 text-light">👋 Hola, {{ user.username }}</span>
+          <a href="{% url 'perfil' %}" class="btn btn-outline-light me-2">Mi perfil</a>
+          <a href="{% url 'logout' %}" class="btn btn-primary">Cerrar sesión</a>
+        {% else %}
           <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Login</a>
-          <a href="{% url 'register' %}" class="btn btn-primary">Registrarse</a>
+          <a href="{% url 'register' %}" class ="btn btn-primary">Registrarse</a>
+        {% endif %}
         </div>
 
       </div>
