@@ -1,0 +1,81 @@
+body {
+    background-color: #121212;
+    color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Card del juego */
+.juego-card {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.juego-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.juego-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.juego-card-body {
+    text-align: center;
+    padding: 1rem;
+}
+
+.juego-card-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Reseñas */
+.reseña-card {
+    background-color: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.reseña-usuario {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.reseña-rating {
+    color: #ffc107;
+    margin-left: 0.5rem;
+}
+
+.reseña-texto {
+    margin-bottom: 0.5rem;
+    color: #ddd;
+}
+
+.reseña-fecha {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+}
+
+.nav-link {
+  font-size: 1.05rem;
+  transition: 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #ffc107 !important;
+}
