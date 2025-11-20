@@ -73,7 +73,7 @@ class Command(BaseCommand):
             "Apex Legends": 4.4,
             "Baldur’s Gate 3": 4.6,
             "Death Stranding": 4.3,
-            "Destiny 2": 3.4,  # Promedio deseado ajustado
+            "Destiny 2": 3.4,
             "Hades": 4.5,
             "Halo Infinite": 4.2,
             "Hogwarts Legacy": 4.0,

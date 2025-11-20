@@ -47,6 +47,7 @@
 <div class="container py-5">
     <a href="{% url 'juegos' %}" class="btn btn-secondary mb-4">← Volver</a>
 
+    <!-- INFO DEL JUEGO -->
     <div class="row mb-4">
         <div class="col-md-4">
             {% if juego.imagen %}
@@ -66,19 +67,51 @@
                         ☆
                     {% endif %}
                 {% endfor %}
+                <span class="text-light">({{ juego.rating_promedio|floatformat:1 }})</span>
             </p>
         </div>
     </div>
 
     <hr class="border-secondary my-4">
 
+    <!-- FORMULARIO DE RESEÑA -->
+    {% if user.is_authenticated %}
+    <div class="mb-4 p-3 border border-secondary rounded">
+        <h4 class="mb-3">Deja tu reseña</h4>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="comentario" class="form-label">Comentario</label>
+                <textarea name="comentario" id="comentario" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="rating" class="form-label">Puntaje</label>
+                <select name="rating" id="rating" class="form-select" required>
+                    <option value="1">1 ⭐</option>
+                    <option value="2">2 ⭐⭐</option>
+                    <option value="3">3 ⭐⭐⭐</option>
+                    <option value="4">4 ⭐⭐⭐⭐</option>
+                    <option value="5" selected>5 ⭐⭐⭐⭐⭐</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar reseña</button>
+        </form>
+    </div>
+    {% else %}
+        <p class="text-light">Para dejar una reseña debes <a href="{% url 'login' %}">iniciar sesión</a>.</p>
+    {% endif %}
+
+    <!-- RESEÑAS -->
     <h2 class="mb-3">💬 Reseñas</h2>
     {% if resenas %}
         {% for r in resenas %}
-            <div class="reseña-card">
-                <div class="reseña-usuario">{{ r.usuario.username }} <span class="reseña-rating">⭐ {{ r.rating }}/5</span></div>
+            <div class="reseña-card mb-3 p-3 border border-secondary rounded">
+                <div class="reseña-usuario fw-bold">{{ r.usuario.username }} 
+                    <span class="reseña-rating text-warning">⭐ {{ r.rating }}/5</span>
+                </div>
                 <div class="reseña-texto">{{ r.comentario }}</div>
-                <div class="reseña-fecha">{{ r.fecha|date:"d/m/Y H:i" }}</div>
+                <!-- Fecha visible como en HTML original -->
+                <div class="reseña-fecha" style="color: #adabab;">{{ r.fecha|date:"d/m/Y H:i" }}</div>
             </div>
         {% endfor %}
     {% else %}
