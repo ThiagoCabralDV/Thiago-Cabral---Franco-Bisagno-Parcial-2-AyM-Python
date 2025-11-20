@@ -88,128 +88,45 @@
 
     <div class="row g-4">
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" class="card-img-top" alt="Cyberpunk 2077">
-          <div class="card-body">
-            <h5 class="card-title">Cyberpunk 2077</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ☆</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
-          </div>
-        </div>
-      </div>
+      {% for juego in juegos %}
+        <div class="col-md-4">
+          <div class="card bg-dark border-secondary h-100">
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg" class="card-img-top" alt="Elden Ring">
-          <div class="card-body">
-            <h5 class="card-title">Elden Ring</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ⭐</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
-          </div>
-        </div>
-      </div>
+            {% if juego.imagen %}
+              <img src="{{ juego.imagen.url }}" class="card-img-top" alt="{{ juego.titulo }}">
+            {% else %}
+              <img src="{% static 'home/img/no-image.png' %}" class="card-img-top" alt="Sin imagen">
+            {% endif %}
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg" class="card-img-top" alt="God of War Ragnarok">
-          <div class="card-body">
-            <h5 class="card-title">God of War: Ragnarok</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ⭐</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
-          </div>
-        </div>
-      </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ juego.titulo }}</h5>
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg" class="card-img-top" alt="Red Dead Redemption 2">
-          <div class="card-body">
-            <h5 class="card-title">Red Dead Redemption 2</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ⭐</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
-          </div>
-        </div>
-      </div>
+              <!-- Por ahora no hay puntaje real, lo agregaremos con reseñas -->
+              <p class="text-warning mb-2">
+                {% for i in estrellas %}
+                  {% if i <= juego.rating_promedio|floatformat:0|add:"0" %}
+                    ⭐
+                  {% else %}
+                    ☆
+                  {% endif %}
+                {% endfor %}
+              </p>
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg" class="card-img-top" alt="GTA V">
-          <div class="card-body">
-            <h5 class="card-title">Grand Theft Auto V</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ☆</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
-          </div>
-        </div>
-      </div>
+              <a href="{% url 'juego_detalle' juego.id %}" class="btn btn-outline-light btn-sm">
+                  Ver reseñas
+              </a>
+            </div>
 
-      <div class="col-md-4">
-        <div class="card bg-dark border-secondary h-100">
-          <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg" class="card-img-top" alt="Counter-Strike 2">
-          <div class="card-body">
-            <h5 class="card-title">Counter-Strike 2</h5>
-            <p class="text-warning mb-2">⭐ ⭐ ⭐ ⭐ ☆</p>
-            <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#modalResenas">
-              Ver reseñas
-            </button>
           </div>
         </div>
-      </div>
+      {% empty %}
+        <p class="text-center">No hay juegos cargados todavía.</p>
+      {% endfor %}
 
     </div>
   </div>
 
-  <!-- MODAL DE RESEÑAS -->
-  <div class="modal fade" id="modalResenas" tabindex="-1" aria-labelledby="modalResenasLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark text-light border-secondary">
-        <div class="modal-header border-secondary">
-          <h5 class="modal-title" id="modalResenasLabel">💬 Reseñas de jugadores</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-
-          <div class="card bg-dark border-secondary mb-3">
-            <div class="card-body">
-              <h6 class="card-title mb-1 text-light">WaluigiMB</h6>
-              <p class="text-warning mb-1">⭐ ⭐ ⭐ ⭐ ⭐</p>
-              <p class="card-text text-light">Un juego increíble, los últimos parches lo dejaron espectacular. Night City se siente viva.</p>
-            </div>
-          </div>
-
-          <div class="card bg-dark border-secondary mb-3">
-            <div class="card-body">
-              <h6 class="card-title mb-1 text-light">PlayerOne</h6>
-              <p class="text-warning mb-1">⭐ ⭐ ⭐ ⭐ ☆</p>
-              <p class="card-text text-light">Buena historia y personajes, aunque todavía tiene algunos bugs menores.</p>
-            </div>
-          </div>
-
-          <div class="card bg-dark border-secondary mb-3">
-            <div class="card-body">
-              <h6 class="card-title mb-1 text-light">NeoX</h6>
-              <p class="text-warning mb-1">⭐ ⭐ ⭐ ☆ ☆</p>
-              <p class="card-text text-light">Visualmente impresionante, pero esperaba más libertad en las decisiones.</p>
-            </div>
-          </div>
-
-        </div>
-        <div class="modal-footer border-secondary">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   <footer class="bg-dark text-center text-light py-3 mt-5 border-top border-secondary">
     <p class="mb-0">© 2025 Foro J</p>
